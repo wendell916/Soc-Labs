@@ -90,11 +90,14 @@ Verify Suricata's status with the command
 ``````
 sudo systemctl status suricata
 ``````
+![image_2024-12-20_232437085](https://github.com/user-attachments/assets/7eead76e-2dce-495c-8fc1-156f1a181826)
 
 Determine the interface and IP address of the server with the command,
 ``````
 ip a
 ``````
+![image_2024-12-20_233013534](https://github.com/user-attachments/assets/a1a4cbf1-1d9b-4af3-bd1e-ea66ec013e3d)
+
 Configure Suricata:
 
 Use a preferred text editor (e.g., nano):
@@ -104,21 +107,33 @@ nano /etc/suricata/suricata.yaml
 Modify the following:
 
 Home_Net Section: Update the IP address of the local network.
+![image_2024-12-20_233314492](https://github.com/user-attachments/assets/0ac64c7e-dfa1-4c80-8a96-c77bf4826126)
 
 AF-Packet Section: Set the interface to the one used by your network.
+![image_2024-12-20_233508106](https://github.com/user-attachments/assets/56aa9896-58ed-4c5a-a5e2-a8bc87b39f0b)
 
-Update signatures:
+Update signatures: Suricata uses Signatures to trigger alerts so it's necessary to install those and keep them updated. 
 
+````
 sudo suricata-update
+````
+Restart suricata 
+````
 sudo systemctl restart suricata
+````
 
-Testing Suricata
+# Testing Suricata
 
-Perform an aggressive Nmap scan on the server running Suricata.
+Performed a simple ping command on the server running Suricata.
+
+![image_2024-12-20_235809065](https://github.com/user-attachments/assets/063b7342-9735-4ee2-8e7c-2b470d0a1d4d)
 
 View alerts:
-
+````
 tail -f /var/log/suricata/fast.log
+````
+
+![image_2024-12-20_235530583](https://github.com/user-attachments/assets/7c1e4345-6ec4-4b49-987e-78e9c129f023)
 
 Alerts generated from the Nmap scan can be found in /var/log/suricata/fast.log.
 
